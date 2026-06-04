@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Created: 2026/05/18 15:52:42 by aligouy           #+#    #+#             */
+/*   Updated: 2026/05/19 12:39:37 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdio.h>
+#include "libft.h"
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*current;
+	t_list	*next;
 
-#endif
+	if (!lst || !del)
+		return ;
+	current = *lst;
+	while (current != NULL)
+	{
+		next = current->next;
+		ft_lstdelone(current, del);
+		current = next;
+	}
+	*lst = NULL;
+}

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Created: 2026/05/05 16:32:51 by aligouy           #+#    #+#             */
+/*   Updated: 2026/05/11 15:26:42 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdio.h>
+#include "libft.h"
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	len;
 
-#endif
+	i = 0;
+	len = ft_strlen(src);
+	if (size == 0)
+		return (len);
+	while (i < size - 1 && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (len);
+}

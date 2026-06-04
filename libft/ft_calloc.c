@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Created: 2026/05/11 10:26:34 by aligouy           #+#    #+#             */
+/*   Updated: 2026/05/26 14:11:50 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdio.h>
+#include "libft.h"
+#include <stdlib.h>
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
 
-#endif
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (nmemb > (size_t)-1 / size)
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, nmemb * size);
+	return ((char *)ptr);
+}

@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Created: 2026/05/18 16:54:29 by aligouy           #+#    #+#             */
+/*   Updated: 2026/05/19 14:29:43 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdio.h>
+#include "libft.h"
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*current;
 
-#endif
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	current = *lst;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new;
+}

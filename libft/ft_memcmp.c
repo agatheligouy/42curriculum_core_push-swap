@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Created: 2026/05/07 10:51:18 by aligouy           #+#    #+#             */
+/*   Updated: 2026/05/07 11:29:34 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include "libft/libft.h"
-# include <stdlib.h>
-# include <stddef.h>
-# include <stdio.h>
+#include "libft.h"
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*us1;
+	unsigned char	*us2;
+	size_t			i;
 
-#endif
+	us1 = (unsigned char *)s1;
+	us2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (us1[i] != us2[i])
+			return (us1[i] - us2[i]);
+		i++;
+	}
+	return (0);
+}

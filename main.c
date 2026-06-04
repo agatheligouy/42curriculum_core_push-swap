@@ -1,55 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   playground.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 14:04:05 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/04 17:45:52 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+#include "libft/libft.h"
 
 int	main(int argc, char **argv)
 {
-	t_list	*node;
 	t_list	*a;
-	int		*x;
-	int		i;
+	char	**arr;
 
 	a = NULL;
-
-	// error handling - externalise to helper function
-	if (argc <= 2)
-	{
-		printf("Give at least 2 integers as arguments");
+	// this function turns the input into an arr and handles the string format 'x y z'
+	// potentially we don't need to handle this edge case
+	arr = process_input(argc, argv);
+	if (!arr)
 		return (1);
-	}
-	// need to handle other wrong outputs: characters included, same number twice
-
-	//build stack a from input variables - need to handle input string as well
-	i = 0;
-	while (i++ < argc - 1)
-	{
-		x = malloc(sizeof(int));
-		*x = ft_atoi(argv[i]);
-		node = ft_lstnew(x);
-		ft_lstadd_back(&a, node);
-	}
-	
-	//print stack a
-	int j = 0;
-	t_list	*current;
-	current = a;
-	while (current)
-	{
-		printf("%d\n", *(int *)current->content);
-		current = current->next;
-	}
-	printf("_\n");
-	printf("a\n");
+	// now we process the arr
+	//print stack a just for fun - remove later
+	if (fill_stack(&a, arr) > 1)
+		print_stack(a);
 	return (0);
 }
