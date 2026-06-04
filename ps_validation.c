@@ -15,6 +15,33 @@
 
 //duplicate values
 
+int	has_duplicates(char **arr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = i + 1;
+	while (arr[i])
+	{
+		while (arr[j])
+		{
+			if (ft_strlen(arr[i]) > ft_strlen(arr[j]))
+			{
+				if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) == 0)
+					return (1);
+			}
+			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[j])) == 0)
+				return (1);
+			j++;
+		}
+		i++;
+		j = i + 1;
+	}
+	return (0);
+}
+
+
 char	**process_input(int argc, char **argv)
 {
 	char	**arr;
@@ -38,6 +65,11 @@ char	**process_input(int argc, char **argv)
 	// now arr is an array of strings with all the input arguments
 	else
 		arr = argv + 1;
+	if (has_duplicates(arr))
+	{
+		printf("There should be no duplicates in the input\n");
+		return (NULL);
+	}
 	return (arr);
 }
 
@@ -51,9 +83,10 @@ size_t	fill_stack(t_list **stack, char **arr)
 	while (arr[i])
 	{
 		x = malloc(sizeof(int));
-		if((*x = ft_atoi(arr[i])) == 0)
+		if((*x = ft_atoi(arr[i])) == 0) // need to handle the case where the int is really 0
 		{
 			printf("found a character in the input - we need integers you dumbdumb\n");
+			//need lstclear here
 			return (1);
 		}
 		node = ft_lstnew(x);
