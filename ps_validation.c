@@ -18,9 +18,7 @@
 char	**process_input(int argc, char **argv)
 {
 	char	**arr;
-	int		i;
 
-	i = 0;
 	if (argc < 2)
 	{
 		printf("Give at least 2 integers as arguments");
@@ -72,9 +70,6 @@ size_t	fill_stack(t_list **stack, char **arr)
 
 void	print_stack(t_list *stack)
 {
-	int	i;
-
-	i = 0;
 	while (stack)
 	{
 		printf("%d\n", *(int *)stack->content);
