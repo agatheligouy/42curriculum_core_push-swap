@@ -86,7 +86,7 @@ size_t	fill_stack(t_list **stack, char **arr)
 		if((*x = ft_atoi(arr[i])) == 0) // need to handle the case where the int is really 0
 		{
 			printf("found a character in the input - we need integers you dumbdumb\n");
-			//need lstclear here
+			ft_lstclear(stack, free);
 			return (1);
 		}
 		node = ft_lstnew(x);
