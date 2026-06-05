@@ -15,16 +15,19 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = push_swap
-
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = main.c ps_validation.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	make -C libft
-	$(CC) $(CFLAGS) $(OBJS) -L libft -lft -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C libft
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

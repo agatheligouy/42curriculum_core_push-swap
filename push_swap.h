@@ -17,8 +17,16 @@
 # include <stddef.h>
 # include <stdio.h>
 
-char	**process_input(int argc, char **argv);
-size_t	fill_stack(t_list **stack, char **arr);
-void	print_stack(t_list *stack);
+typedef struct s_node
+{
+	int x;
+	struct s_node *next;
+	struct s_node *prev;
+}	t_node;
 
+char	**process_input(int argc, char **argv);
+size_t	fill_stack(t_node **stack, char **arr);
+void	print_stack(t_node *stack);
+t_node	*create_node(int x);
+void	add_node(t_node **stack, t_node *node);
 #endif

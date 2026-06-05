@@ -15,7 +15,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_list	*a;
+	t_node	*a;
 	char	**arr;
 
 	a = NULL;
@@ -26,11 +26,7 @@ int	main(int argc, char **argv)
 		return (1);
 	// now we process the arr
 	//print stack a just for fun - remove later
-	if (fill_stack(&a, arr) == 1)
-	{
-		printf("fill stack returns 1\n");
-		return (1);
-	}
-	print_stack(a);
+	if (fill_stack(&a, arr) > 1)
+		print_stack(a);
 	return (0);
 }

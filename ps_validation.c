@@ -15,37 +15,12 @@
 
 //duplicate values
 
-int	has_duplicates(char **arr)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = i + 1;
-	while (arr[i])
-	{
-		while (arr[j])
-		{
-			if (ft_strlen(arr[i]) > ft_strlen(arr[j]))
-			{
-				if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) == 0)
-					return (1);
-			}
-			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[j])) == 0)
-				return (1);
-			j++;
-		}
-		i++;
-		j = i + 1;
-	}
-	return (0);
-}
-
-
 char	**process_input(int argc, char **argv)
 {
 	char	**arr;
+	/*int		i;
 
+	i = 0;*/
 	if (argc < 2)
 	{
 		printf("Give at least 2 integers as arguments");
@@ -65,32 +40,19 @@ char	**process_input(int argc, char **argv)
 	// now arr is an array of strings with all the input arguments
 	else
 		arr = argv + 1;
-	if (has_duplicates(arr))
-	{
-		printf("There should be no duplicates in the input\n");
-		return (NULL);
-	}
 	return (arr);
 }
 
-size_t	fill_stack(t_list **stack, char **arr)
+size_t	fill_stack(t_node **stack, char **arr)
 {
 	size_t	i;
-	int		*x;
-	t_list	*node;
+	t_node	*node;
 
 	i = 0;
 	while (arr[i])
 	{
-		x = malloc(sizeof(int));
-		if((*x = ft_atoi(arr[i])) == 0) // need to handle the case where the int is really 0
-		{
-			printf("found a character in the input - we need integers you dumbdumb\n");
-			ft_lstclear(stack, free);
-			return (1);
-		}
-		node = ft_lstnew(x);
-		ft_lstadd_back(stack, node);
+		node = create_node(ft_atoi(arr[i]));
+		add_node(stack, node);
 		i++;
 	}
 	if (i == 1)
@@ -101,13 +63,48 @@ size_t	fill_stack(t_list **stack, char **arr)
 	return (i);
 }	
 
-void	print_stack(t_list *stack)
+void	print_stack(t_node *stack)
 {
+	/*int	i;
+
+	i = 0;*/
 	while (stack)
 	{
-		printf("%d\n", *(int *)stack->content);
+		printf("%d\n", stack->x);
 		stack = stack->next;
 	}
 	printf("_\n");
 	printf("a\n");
+}
+
+t_node *create_node(int x)
+{
+	t_node *node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->x = x;
+	node->next = node;
+	node->prev = node;
+	return (node);
+}
+
+void add_node(t_node **stack, t_node *node)
+{
+	t_node *head;
+	t_node *tail;
+	if (!stack || !node)
+		return ;
+	if (!*stack)
+	{
+		*stack = node;
+		return ;
+	}
+	head = *stack;
+	tail = head->prev;
+	node->prev = tail;
+	node->next = head;
+	tail->next = node;
+	head->prev = node;
 }
