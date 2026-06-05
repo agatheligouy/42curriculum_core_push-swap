@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 16:04:41 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 17:00:04 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,50 +137,3 @@ int	fill_stack(t_node **stack, char **arr)
 	}
 	return (i);
 }	
-
-void	print_stack(t_node *stack, int stacksize)
-{
-	int	i;
-	
-	i = 0;
-	while (i < stacksize)
-	{
-		printf("%d\n", stack->x);
-		stack = stack->next;
-		i++;
-	}
-	printf("_\n");
-	printf("a\n");
-}
-
-t_node *create_node(int x)
-{
-	t_node *node;
-
-	node = malloc(sizeof(t_node));
-	if (!node)
-		return (NULL);
-	node->x = x;
-	node->next = node;
-	node->prev = node;
-	return (node);
-}
-
-void add_node(t_node **stack, t_node *node)
-{
-	t_node *head;
-	t_node *tail;
-	if (!stack || !node)
-		return ;
-	if (!*stack)
-	{
-		*stack = node;
-		return ;
-	}
-	head = *stack;
-	tail = head->prev;
-	node->prev = tail;
-	node->next = head;
-	tail->next = node;
-	head->prev = node;
-}

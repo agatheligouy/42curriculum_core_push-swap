@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRCS = main.c ps_validation.c disorder.c
+SRCS = main.c ps_validation.c disorder.c benchmark.c lst_handling.c
 
 OBJS = $(SRCS:.c=.o)
 
