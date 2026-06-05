@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 16:04:16 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 16:17:34 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
 int		has_duplicates(char **arr);
 int 	has_invalid_args(char **arr);
+double  compute_disorder(t_node **stack, int stacksize);
 
 #endif

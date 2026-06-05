@@ -6,7 +6,7 @@
 #    By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/04 17:28:38 by aligouy           #+#    #+#              #
-#    Updated: 2026/06/04 17:32:54 by aligouy          ###   ########.fr        #
+#    Updated: 2026/06/05 16:18:41 by aligouy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRCS = main.c ps_validation.c
+SRCS = main.c ps_validation.c disorder.c
 
 OBJS = $(SRCS:.c=.o)
 

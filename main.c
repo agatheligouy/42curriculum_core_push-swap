@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 16:03:44 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 16:28:18 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	t_node	*a;
 	char	**arr;
 	int		asize;
+	double	disorder;
 
 	a = NULL;
 	// this function turns the input into an arr and handles the string format 'x y z'
@@ -26,8 +27,16 @@ int	main(int argc, char **argv)
 	if (!arr)
 		return (1);
 	// now we process the arr
-	//print stack a just for fun - remove later
-	if ((asize = fill_stack(&a, arr)) > 1)
+	asize = fill_stack(&a, arr);
+	//print stack a just for fun
+	if (asize > 1)
 		print_stack(a, asize);
+	// compute disorder value
+	if ((disorder = compute_disorder(&a, asize)) == 0)
+	{
+		printf("disorder is %f, stack is already sorted\n", disorder);
+		return (0);
+	}
+	printf("disorder value is %f\n", disorder);
 	return (0);
 }
