@@ -29,4 +29,6 @@ size_t	fill_stack(t_node **stack, char **arr);
 void	print_stack(t_node *stack);
 t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
+int	has_duplicates(char **arr);
+
 #endif
