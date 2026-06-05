@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 17:00:04 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 17:05:48 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	fill_stack(t_node **stack, char **arr)
 		add_node(stack, node);
 		i++;
 	}
-	if (i == 1) //should move this to process_input
+	if (i == 1)
 	{
 		printf("Give at least 2 integers as arguments\n");
 		return (1);

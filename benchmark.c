@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:57:36 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 17:00:22 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 17:06:56 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	print_stack(t_node *stack, int stacksize)
 {
+	/* This function is NOT needed for the final submission
+	 * It takes a pointer to the head of a linked list and the number of elements of the linked list
+	 * It prints the integer contained in each node of the list*/
+	
 	int	i;
 	
 	i = 0;
