@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 15:20:25 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 16:04:41 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ char	**process_input(int argc, char **argv)
 	return (arr);
 }
 
-size_t	fill_stack(t_node **stack, char **arr)
+int	fill_stack(t_node **stack, char **arr)
 {
 	/* This function takes an array of ints as input and turns it into a linked list
 	 * where each element of the array is a node
 	 * It returns the number of elements in the linked list*/
 	
-	size_t	i;
+	int	i;
 	t_node	*node;
 
 	i = 0;
@@ -138,9 +138,9 @@ size_t	fill_stack(t_node **stack, char **arr)
 	return (i);
 }	
 
-void	print_stack(t_node *stack, size_t stacksize)
+void	print_stack(t_node *stack, int stacksize)
 {
-	size_t	i;
+	int	i;
 	
 	i = 0;
 	while (i < stacksize)

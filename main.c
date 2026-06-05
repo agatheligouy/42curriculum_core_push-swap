@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 15:19:14 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 16:03:44 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	char	**arr;
-	size_t	asize;
+	int		asize;
 
 	a = NULL;
 	// this function turns the input into an arr and handles the string format 'x y z'
