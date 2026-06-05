@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 14:40:56 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 15:19:37 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_node
 
 char	**process_input(int argc, char **argv);
 size_t	fill_stack(t_node **stack, char **arr);
-void	print_stack(t_node *stack);
+void	print_stack(t_node *stack, size_t stacksize);
 t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
 int		has_duplicates(char **arr);

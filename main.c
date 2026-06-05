@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 14:45:32 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 15:19:14 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	char	**arr;
+	size_t	asize;
 
 	a = NULL;
 	// this function turns the input into an arr and handles the string format 'x y z'
@@ -26,7 +27,7 @@ int	main(int argc, char **argv)
 		return (1);
 	// now we process the arr
 	//print stack a just for fun - remove later
-	if (fill_stack(&a, arr) > 1)
-		print_stack(a);
+	if ((asize = fill_stack(&a, arr)) > 1)
+		print_stack(a, asize);
 	return (0);
 }
