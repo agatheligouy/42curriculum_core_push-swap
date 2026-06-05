@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/04 17:44:39 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/05 14:40:56 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ size_t	fill_stack(t_node **stack, char **arr);
 void	print_stack(t_node *stack);
 t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
-int	has_duplicates(char **arr);
+int		has_duplicates(char **arr);
+int 	has_invalid_args(char **arr);
 
 #endif
