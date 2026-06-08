@@ -1,14 +1,14 @@
 #include "push_swap.h"
 
-void swap(t_node **stack)
+void	swap(t_node **stack)
 {
-	t_node *head;
-	t_node *tail;
-	t_node *second;
-	t_node *third;
+	t_node	*head;
+	t_node	*tail;
+	t_node	*second;
+	t_node	*third;
 
 	if (!stack || !*stack || (*stack)->next == *stack)
-    	return ;
+		return ;
 	head = *stack;
 	if (head->next == head->prev)
 	{
@@ -27,47 +27,45 @@ void swap(t_node **stack)
 	*stack = second;
 }
 
-void rotate(t_node **stack)
+void	rotate(t_node **stack)
 {
 	if (!stack || !*stack || (*stack)->next == *stack)
-    	return ;
-    *stack = (*stack)->next;
+		return ;
+	*stack = (*stack)->next;
 }
 
-void rrotate(t_node **stack)
+void	rrotate(t_node **stack)
 {
 	if (!stack || !*stack || (*stack)->next == *stack)
-    	return ;
-    *stack = (*stack)->prev;
+		return ;
+	*stack = (*stack)->prev;
 }
 
-void push(t_node **src, t_node **dest)
+void	push(t_node **src, t_node **dest)
 {
-	t_node *head_src;
-	t_node *tail_dest;
+	t_node	*node;
+	t_node	*tail;
 
 	if (!src || !*src || !dest)
 		return ;
-	head_src = *src;
-	if (head_src->next == head_src)
+	node = *src;
+	if (node->next == node)
 		*src = NULL;
-	head_src->prev->next = head_src->next;
-	head_src->next->prev = head_src->prev;
-	*src = second_src;
-	if (*dest == NULL)
+	else
 	{
-		head_src->next = head_src;
-		head_src->prev = head_src;
-		*dest = head_src;
-		return ;
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
+		*src = node->next;
 	}
-	tail_dest = (*dest)->prev;
-	head_src->next = *dst;
-	head_src->prev = tail_dest;
-	(*dst)->prev = head_src;
-	tail_dest->next = head_src;
-	*dst = head_src;
+	node->next = node;
+	node->prev = node;
+	if (*dest)
+	{
+		tail = (*dest)->prev;
+		node->next = *dest;
+		node->prev = tail;
+		(*dest)->prev = node;
+		tail->next = node;
+	}
+	*dest = node;
 }
-
-
-

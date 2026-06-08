@@ -40,5 +40,9 @@ void	print_stack(t_node *stack, int stacksize);
 t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
 void	free_stack(t_node **stack, int stacksize);
+void	push(t_node **src, t_node **dest);
+void	swap(t_node **stack);
+void	rotate(t_node **stack);
+void	rrotate(t_node **stack);
 
 #endif

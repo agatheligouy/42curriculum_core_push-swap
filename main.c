@@ -16,11 +16,14 @@
 int	main(int argc, char **argv)
 {
 	t_node	*a;
+	t_node	*b;
 	char	**arr;
 	int		asize;
+	int     bsize = 0;
 	double	disorder;
 
 	a = NULL;
+	b = NULL;
 	// this function turns the input into an arr and handles the string format 'x y z'
 	// potentially we don't need to handle the string edge case
 	arr = process_input(argc, argv);
@@ -38,6 +41,10 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	printf("disorder value is %f\n", disorder);
+	push(&a, &b);
+	print_stack(a, asize - 1);
+	print_stack(b, bsize + 1);
 	free_stack(&a, asize);
+	free_stack(&b, bsize);
 	return (0);
 }
