@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:59:51 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 11:47:37 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 14:51:12 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_node	*create_node(int x)
 {
-	t_node *node;
+	t_node	*node;
 
 	node = malloc(sizeof(t_node));
 	if (!node)
@@ -27,8 +27,9 @@ t_node	*create_node(int x)
 
 void	add_node(t_node **stack, t_node *node)
 {
-	t_node *head;
-	t_node *tail;
+	t_node	*head;
+	t_node	*tail;
+
 	if (!stack || !node)
 		return ;
 	if (!*stack)
@@ -53,7 +54,7 @@ void	free_stack(t_node **stack, int stacksize)
 	t_node	*next;
 	int		i;
 
-	if(!stack)
+	if (!stack)
 		return ;
 	current = *stack;
 	i = 0;
