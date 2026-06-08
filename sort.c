@@ -32,22 +32,22 @@ void	sort_three(t_node **head)
 	first = *head;
 	second = first->next;
 	third = second->next;
-	if (first->x > second->x && second->x > third->x)
+	if (first->x > second->x && second->x > third->x) // 321
 	{
-		rotate(head);
-		swap(head);
+		rotate(head); // 213
+		swap(head); // 123
 	}
-	else if (first->x > second->x && second->x < third->x)
-		rotate(head);
-	else if (first->x < second->x && second->x < third->x)
-	{
+	else if (first->x > third->x && third->x > second->x) // 312
+		rotate(head); // 123
+	else if (second->x > first->x && first->x > third->x) // 231  
 		rrotate(head);
+	else if (third->x > first->x && first->x > second->x) // 213
 		swap(head);
+	else if (second->x > third->x && third->x > first->x) // 132
+	{
+		rrotate(head); // 213
+		swap(head); // 123
 	}
-	else if (first->x > second->x)
-		rotate(head);
-	else if (first->x < second->x)
-		swap(head);
 }
 
 
