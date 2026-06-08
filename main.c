@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 17:56:03 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 18:25:50 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ int	main(int argc, char **argv)
 	printf("disorder value is %f\n", disorder);
 	printf("---\n");
 	printf("size of a is %d, size of b is %d\n", asize, bsize);
+	// I heard from many students + guide that hard-coding sort_two, sort_three and sort_five is a good idea so I started that
 	if (asize == 2)
 		sort_two(&a);
+	if (asize == 3)
+		sort_three(&a);
+//	if (asize == 5)
+//		sort_five(&a);
 	//push(&a, &b, &asize, &bsize);
 	//printf("---\n");
-	//printf("after push, size of a is %d, size of b is %d\n", asize, bsize);
+	//iprintf("after push, size of a is %d, size of b is %d\n", asize, bsize);
 	print_stack(a, asize, 'a');
 	print_stack(b, bsize, 'b');
 	free_stack(&a, asize);
