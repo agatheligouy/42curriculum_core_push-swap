@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 17:05:48 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 16:45:28 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ int	has_invalid_args(char **arr)
 	j = 0;
 	while (arr[i])
 	{
+		if (arr[i][0] == '-')
+			j++;
 		while (arr[i][j])
 		{
-			if(!ft_isdigit(arr[i][j]))
+			if (!ft_isdigit(arr[i][j]))
 				return (1);
 			j++;
 		}
