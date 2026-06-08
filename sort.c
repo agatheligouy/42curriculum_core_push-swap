@@ -14,7 +14,13 @@
 
 void	sort_two(t_node **head)
 {
-	rotate(head);
+	t_node	*first;
+	t_node	*second;
+
+	first = *head;
+	second = first->next;
+	if (first->x > second->x)
+		rotate(head);
 }
 
 void	sort_three(t_node **head)
