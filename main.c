@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/05 17:22:32 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 11:47:03 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	printf("disorder value is %f\n", disorder);
-	// I think we need a lstclear-type function here to free stack a and all its nodes
+	free_stack(&a, asize);
 	return (0);
 }
