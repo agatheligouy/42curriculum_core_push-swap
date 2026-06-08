@@ -41,7 +41,7 @@ void	rrotate(t_node **stack)
 	*stack = (*stack)->prev;
 }
 
-void	push(t_node **src, t_node **dest)
+void	push(t_node **src, t_node **dest, int *sizesrc, int *sizedest)
 {
 	t_node	*node;
 	t_node	*tail;
@@ -68,4 +68,6 @@ void	push(t_node **src, t_node **dest)
 		tail->next = node;
 	}
 	*dest = node;
+	(*sizesrc)--;
+	(*sizedest)++;
 }

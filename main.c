@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 11:47:03 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 17:09:51 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,15 @@ int	main(int argc, char **argv)
 		printf("disorder is %f, stack is already sorted\n", disorder);
 		return (0);
 	}
+	printf("---\n");
 	printf("disorder value is %f\n", disorder);
-	push(&a, &b);
-	print_stack(a, asize - 1);
-	print_stack(b, bsize + 1);
+	printf("---\n");
+	printf("size of a is %d, size of b is %d\n", asize, bsize);
+	push(&a, &b, &asize, &bsize);
+	printf("---\n");
+	printf("after push, size of a is %d, size of b is %d\n", asize, bsize);
+	print_stack(a, asize);
+	print_stack(b, bsize);
 	free_stack(&a, asize);
 	free_stack(&b, bsize);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 11:46:41 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 17:07:44 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_stack(t_node *stack, int stacksize);
 t_node	*create_node(int x);
 void	add_node(t_node **stack, t_node *node);
 void	free_stack(t_node **stack, int stacksize);
-void	push(t_node **src, t_node **dest);
+void	push(t_node **src, t_node **dest, int *sizesrc, int *sizedest);
 void	swap(t_node **stack);
 void	rotate(t_node **stack);
 void	rrotate(t_node **stack);
