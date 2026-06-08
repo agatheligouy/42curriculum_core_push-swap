@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 17:07:44 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 17:55:21 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int 	has_invalid_args(char **arr);
 double  compute_disorder(t_node **stack, int stacksize);
 
 // Utils
-void	print_stack(t_node *stack, int stacksize);
+void	print_stack(t_node *stack, int stacksize, char name);
 
 // List handling
 t_node	*create_node(int x);
@@ -44,5 +44,8 @@ void	push(t_node **src, t_node **dest, int *sizesrc, int *sizedest);
 void	swap(t_node **stack);
 void	rotate(t_node **stack);
 void	rrotate(t_node **stack);
+
+// Sorting
+void	sort_two(t_node **head);
 
 #endif

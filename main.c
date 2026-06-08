@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 17:09:51 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/08 17:56:03 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	asize = fill_stack(&a, arr);
 	//print stack a just for fun - remove for final submission
 	if (asize > 1)
-		print_stack(a, asize);
+		print_stack(a, asize, 'a');
 	// compute disorder value
 	if ((disorder = compute_disorder(&a, asize)) == 0)
 	{
@@ -44,11 +44,13 @@ int	main(int argc, char **argv)
 	printf("disorder value is %f\n", disorder);
 	printf("---\n");
 	printf("size of a is %d, size of b is %d\n", asize, bsize);
-	push(&a, &b, &asize, &bsize);
-	printf("---\n");
-	printf("after push, size of a is %d, size of b is %d\n", asize, bsize);
-	print_stack(a, asize);
-	print_stack(b, bsize);
+	if (asize == 2)
+		sort_two(&a);
+	//push(&a, &b, &asize, &bsize);
+	//printf("---\n");
+	//printf("after push, size of a is %d, size of b is %d\n", asize, bsize);
+	print_stack(a, asize, 'a');
+	print_stack(b, bsize, 'b');
 	free_stack(&a, asize);
 	free_stack(&b, bsize);
 	return (0);
