@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 18:25:50 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 12:02:00 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int argc, char **argv)
 	//push(&a, &b, &asize, &bsize);
 	//printf("---\n");
 	//iprintf("after push, size of a is %d, size of b is %d\n", asize, bsize);
+	rank_integers(&a, asize);
 	print_stack(a, asize, 'a');
 	print_stack(b, bsize, 'b');
 	free_stack(&a, asize);

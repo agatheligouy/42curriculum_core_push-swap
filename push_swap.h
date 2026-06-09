@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:46:22 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 18:24:37 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 12:01:50 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_node
 {
 	int x;
+	int	rank;
 	struct s_node *next;
 	struct s_node *prev;
 }	t_node;
@@ -48,5 +49,6 @@ void	rrotate(t_node **stack);
 // Sorting
 void	sort_two(t_node **head);
 void	sort_three(t_node **head);
+void    rank_integers(t_node **stack, int stacksize);
 
 #endif

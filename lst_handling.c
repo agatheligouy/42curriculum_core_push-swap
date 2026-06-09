@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:59:51 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 14:51:12 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 11:54:22 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_node	*create_node(int x)
 	if (!node)
 		return (NULL);
 	node->x = x;
+	node->rank = 0;
 	node->next = node;
 	node->prev = node;
 	return (node);

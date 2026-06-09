@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:12:24 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 18:28:08 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 13:05:23 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,44 @@ void	sort_three(t_node **head)
 	}
 }
 
+void	rank_integers(t_node **stack, int stacksize)
+{
+	int	i;
+	int	j;
+	t_node	*node1;
+	t_node	*node2;
+	
+	i = 0;
+	j = 0;
+	node1 = *stack;
+	node2 = *stack;
+	while (i < stacksize)
+	{
+		while (j < stacksize)
+		{
+			if (node1->x > node2->x)
+				(node1->rank)++;
+			node2 = node2->next;
+			j++;
+		}
+		node2 = node1;
+		j = 0;
+		node1 = node1->next;
+		i++;
+	}
+}
+
+void	sort_radix(t_node **stacka, t_node **stackb, int *asize, int *bsize)
+{
+	int		i;
+	int		j;
+	t_node	*a;
+	t_node	*b;
+
+	i = 0;
+	j = 0;
+	a = *stacka;
+	b = *stackb
+	// TBD
+}
 

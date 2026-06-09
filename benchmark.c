@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:57:36 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 17:55:01 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 12:01:17 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_stack(t_node *stack, int stacksize, char name)
 	i = 0;
 	while (i < stacksize)
 	{
-		printf("%d\n", stack->x);
+		printf("%d - %d\n", stack->x, stack->rank);
 		stack = stack->next;
 		i++;
 	}
