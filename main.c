@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/09 12:02:00 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 16:25:50 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,18 @@ int	main(int argc, char **argv)
 	asize = fill_stack(&a, arr);
 	//print stack a just for fun - remove for final submission
 	if (asize > 1)
+	{
+		printf("\n----STEP 1 - stack a is filled----\n");
 		print_stack(a, asize, 'a');
+	}
 	// compute disorder value
 	if ((disorder = compute_disorder(&a, asize)) == 0)
 	{
 		printf("disorder is %f, stack is already sorted\n", disorder);
 		return (0);
 	}
-	printf("---\n");
+	printf("\n----STEP 2 - disorder value----\n");
 	printf("disorder value is %f\n", disorder);
-	printf("---\n");
-	printf("size of a is %d, size of b is %d\n", asize, bsize);
 	// I heard from many students + guide that hard-coding sort_two, sort_three and sort_five is a good idea so I started that
 	if (asize == 2)
 		sort_two(&a);
@@ -53,10 +54,18 @@ int	main(int argc, char **argv)
 //		sort_five(&a);
 	//push(&a, &b, &asize, &bsize);
 	//printf("---\n");
-	//iprintf("after push, size of a is %d, size of b is %d\n", asize, bsize);
+	//printf("after push, size of a is %d, size of b is %d\n", asize, bsize);	
+	printf("\n----STEP 3 - ranking integers----\n");
 	rank_integers(&a, asize);
 	print_stack(a, asize, 'a');
+	printf("\n");
 	print_stack(b, bsize, 'b');
+	printf("----STEP 4 - sort radix----\n");
+	sort_radix(&a, &b, &asize, &bsize);
+	print_stack(a, asize, 'a');
+	printf("\n");
+	print_stack(b, bsize, 'b');
+	printf("size of a is %d and size of be is %d\n", asize, bsize);
 	free_stack(&a, asize);
 	free_stack(&b, bsize);
 	return (0);

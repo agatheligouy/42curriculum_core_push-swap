@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:57:36 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/09 12:01:17 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 16:21:05 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,35 @@ void	print_stack(t_node *stack, int stacksize, char name)
 	}
 	printf("_\n");
 	printf("%c\n", name);
+	printf("\n");
+}
+
+void	print_binary(int n, int bits)
+{
+	int	i;
+
+	i = bits - 1;
+	while (i >= 0)
+	{
+		printf("%d", (n >> i) & 1);
+		i--;
+	}
+	printf("\n");
+}
+
+void	print_stack_binary(t_node *stack, int stacksize, int bits, char name)
+{
+	int	i;
+
+	i = 0;
+	while (i < stacksize)
+	{
+		printf("%d - ", stack->rank);
+		print_binary(stack->rank, bits);
+		stack = stack->next;
+		i++;
+	}
+	printf("_\n");
+	printf("%c\n", name);
+	printf("\n");
 }
