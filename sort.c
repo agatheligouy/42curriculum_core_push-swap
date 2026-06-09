@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:12:24 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/09 16:35:14 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 16:43:55 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	assess_bits(int stacksize)
    			bits++;
 		}
 	}
-	printf("bits is %d\n", bits);
+	printf("\n we need %d bits\n", bits);
 	return (bits);
 }
 
@@ -129,6 +129,7 @@ void	sort_radix(t_node **stacka, t_node **stackb, int *asize, int *bsize)
 	b = *stackb;
 	bits = assess_bits(*asize);
 	// not needed - prints rank in decimal and binary of each node of the stack
+	printf("\n");
 	print_stack_binary(*stacka, *asize, bits, 'a');
 	i = 0;
 	// the actual radix logic
@@ -150,6 +151,8 @@ void	sort_radix(t_node **stacka, t_node **stackb, int *asize, int *bsize)
 			a = a->next;
 			j++;
 		}
+		print_stack_binary(*stacka, *asize, bits, 'a');
+		print_stack_binary(*stackb, *bsize, bits, 'b');
 		i++;
 	}
 }

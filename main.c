@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 10:43:27 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/09 16:25:50 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/09 16:46:14 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,7 @@ int	main(int argc, char **argv)
 	print_stack(a, asize, 'a');
 	printf("\n");
 	print_stack(b, bsize, 'b');
-	printf("----STEP 4 - sort radix----\n");
-	sort_radix(&a, &b, &asize, &bsize);
-	print_stack(a, asize, 'a');
 	printf("\n");
-	print_stack(b, bsize, 'b');
-	printf("size of a is %d and size of be is %d\n", asize, bsize);
 	free_stack(&a, asize);
 	free_stack(&b, bsize);
 	return (0);
