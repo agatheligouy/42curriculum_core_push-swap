@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/08 16:45:28 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/10 14:59:25 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	has_duplicates(char **arr)
 				if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) == 0)
 					return (1);
 			}
-			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[j])) == 0)
+			else if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[j])) == 0)
 				return (1);
 			j++;
 		}
@@ -72,6 +72,25 @@ int	has_invalid_args(char **arr)
 	return (0);
 }
 
+char	*flagcheck(char *str)
+{
+	char	*flag;
+	int		i;
+
+	i = 0;
+	flag = NULL;
+	printf("in flagcheck, argv[1] is %s\n", str);
+	if (str[0] == '-' && str[1] == '-')
+	{
+		printf("found --, str + 2 is %s\n", str + 2);
+		if (ft_strncmp(str + 2, "adaptative", ft_strlen("adaptative")) == 0)
+			flag = str + 2;
+		else
+			return (NULL);
+	}
+	return (flag);
+}
+
 char	**process_input(int argc, char **argv)
 {
 	/* This function takes as input the number of arguments argc and the arraz of arguments argv
@@ -83,11 +102,33 @@ char	**process_input(int argc, char **argv)
 	 * */
 	
 	char	**arr;
+	char	*flag;
 
-	if (argc < 2)
+	if (argc == 1)
 	{
 		printf("Give at least 2 integers as arguments");
 		return (NULL);
+	}
+	else
+	{
+		if (flagcheck(argv[1]) && argc > 2)
+		{
+			flag = flagcheck(argv[1]);
+			arr = argv + 2;
+			printf("found a valid flag with more than 2 args, first arg of arr is %s\n", arr[0]);
+		}
+		else if (flagcheck(argv[1]) && argc == 2)
+		{
+			printf("Error: valid flag found but only 2 args\n");
+			return (NULL);
+		}
+		else if (!flagcheck(argv[1]))
+		{
+			printf("Error: flag is not valid\n");
+			return (NULL);
+		}
+		else
+			arr = argv + 1;
 	}
 	// if there are exactly 2 arguments, split the string with a space separator
 	if (argc == 2)
@@ -101,8 +142,8 @@ char	**process_input(int argc, char **argv)
 	}
 	// if there are more than 2 arguments, we assign the argv starting from the second argument to arr
 	// now arr is an array of strings with all the input arguments
-	else
-		arr = argv + 1;
+	//else
+	//	arr = argv + 1;
 	if (has_invalid_args(arr))
 	{
 		printf("There should only be integers in the input\n");
