@@ -61,6 +61,8 @@ int	main(int argc, char **argv)
 	printf("\n");
 	print_stack(b, bsize, 'b');
 	printf("\n");
+	printf("\n----STEP 4 - radix sort----\n");
+	sort_radix(&a, &b, &asize, &bsize);
 	free_stack(&a, asize);
 	free_stack(&b, bsize);
 	return (0);

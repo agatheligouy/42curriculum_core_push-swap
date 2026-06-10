@@ -119,40 +119,48 @@ void	sort_radix(t_node **stacka, t_node **stackb, int *asize, int *bsize)
 	int		i;
 	int		j;
 	t_node	*a;
-	t_node	*b;
+	//t_node	*b;
 	(void)bsize;
 	int		bits;
 
 	i = 0;
 	j = 0;
 	a = *stacka;
-	b = *stackb;
+	//b = *stackb;
 	bits = assess_bits(*asize);
 	// not needed - prints rank in decimal and binary of each node of the stack
 	printf("\n");
 	print_stack_binary(*stacka, *asize, bits, 'a');
-	i = 0;
 	// the actual radix logic
-	while (i < 2) // for now I only tested for the least-significant bit, this needs to loop further
+	while (i < 1) // for now I only tested for the least-significant bit, this needs to loop further
 	{
-		while (j < *asize - 1)
+		printf("\nlooking at bit %d from the right\n", i + 1);
+		while (j < *asize)
 		{
 			printf("evaluating last bit %d for node %d\n", (a->rank >> i) & 1, a->rank);
 			if (((a->rank >> i) & 1) == 1)
 			{
 				printf("ra\n");
 				rotate(stacka);
+				print_stack_binary(*stacka, *asize, bits, 'a');
+				print_stack_binary(*stackb, *bsize, bits, 'b');
+				a = a->next;
+				j++;
 			}
 			else
 			{
 				printf("pb\n");
+				a = a->next;
 				push(stacka, stackb, asize, bsize);
+				print_stack_binary(*stacka, *asize, bits, 'a');
+				print_stack_binary(*stackb, *bsize, bits, 'b');
 			}
-			a = a->next;
-			j++;
 		}
+		printf("\n");
+		printf("Stack after this digit are:\n");
 		print_stack_binary(*stacka, *asize, bits, 'a');
 		print_stack_binary(*stackb, *bsize, bits, 'b');
 		i++;
+		//need to push back to a;
 	}
 }
