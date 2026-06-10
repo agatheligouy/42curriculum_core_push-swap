@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:12:24 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/09 16:43:55 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/10 11:42:39 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,48 +119,72 @@ void	sort_radix(t_node **stacka, t_node **stackb, int *asize, int *bsize)
 	int		i;
 	int		j;
 	t_node	*a;
-	//t_node	*b;
+	t_node	*b;
 	(void)bsize;
 	int		bits;
+	int		opcount;
 
 	i = 0;
 	j = 0;
 	a = *stacka;
-	//b = *stackb;
+	b = *stackb;
 	bits = assess_bits(*asize);
+	opcount = 0;
 	// not needed - prints rank in decimal and binary of each node of the stack
 	printf("\n");
 	print_stack_binary(*stacka, *asize, bits, 'a');
 	// the actual radix logic
-	while (i < 1) // for now I only tested for the least-significant bit, this needs to loop further
+	while (i < bits) // for now I only tested for the least-significant bit, this needs to loop further
 	{
-		printf("\nlooking at bit %d from the right\n", i + 1);
+		//printf("\n\nlooking at bit %d from the right\n", i + 1);
 		while (j < *asize)
 		{
-			printf("evaluating last bit %d for node %d\n", (a->rank >> i) & 1, a->rank);
+			//printf("evaluating bit %d for node %d\nasize is %d, j is %d\n", (a->rank >> i) & 1, a->rank, *asize, j);
 			if (((a->rank >> i) & 1) == 1)
 			{
-				printf("ra\n");
+				printf(">> ra\n");
 				rotate(stacka);
-				print_stack_binary(*stacka, *asize, bits, 'a');
-				print_stack_binary(*stackb, *bsize, bits, 'b');
+				opcount++;
+				//print_stack_binary(*stacka, *asize, bits, 'a');
+				//print_stack_binary(*stackb, *bsize, bits, 'b');
 				a = a->next;
 				j++;
 			}
 			else
 			{
-				printf("pb\n");
+				printf(">> pb\n");
 				a = a->next;
 				push(stacka, stackb, asize, bsize);
-				print_stack_binary(*stacka, *asize, bits, 'a');
-				print_stack_binary(*stackb, *bsize, bits, 'b');
+				opcount++;
+				//print_stack_binary(*stacka, *asize, bits, 'a');
+				//print_stack_binary(*stackb, *bsize, bits, 'b');
 			}
 		}
+		//printf("\n");
+		//printf("Stack after this digit are:\n");
+		//print_stack_binary(*stacka, *asize, bits, 'a');
+		//print_stack_binary(*stackb, *bsize, bits, 'b');
+		//printf("size of a is %d and size of b is %d\n", *asize, *bsize);
+		i++;
+		//printf("\nNow pushing everything back to a\n");
+		while (*bsize > 0)
+		{
+			printf(">> pa\n");
+			push(stackb, stacka, bsize, asize);
+			opcount++;
+		}
 		printf("\n");
-		printf("Stack after this digit are:\n");
+		//printf("Stack after pushing back to a are:\n");
+		//print_stack_binary(*stacka, *asize, bits, 'a');
+		//print_stack_binary(*stackb, *bsize, bits, 'b');
+		//printf("a->rank has rank %d, stacka->rank is %d\n", a->rank, (*stacka)->rank);
+		a = *stacka;
+		j = 0;
+		//printf("a->rank has rank %d, stacka->rank is %d\n", a->rank, (*stacka)->rank);
+		//printf("asize is %d, bsize is %d\n", *asize, *bsize);
+	}
 		print_stack_binary(*stacka, *asize, bits, 'a');
 		print_stack_binary(*stackb, *bsize, bits, 'b');
-		i++;
-		//need to push back to a;
-	}
+		printf("total op count is %d\n", opcount);
+
 }
