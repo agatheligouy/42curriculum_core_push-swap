@@ -6,14 +6,12 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/11 13:04:14 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/11 17:40:02 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-
-//duplicate values
 
 int	has_duplicates(char **arr)
 {
@@ -72,75 +70,83 @@ int	has_invalid_args(char **arr)
 	return (0);
 }
 
-int	process_flags(char **argv, int *mode, int *bench)
-{
-	int	i;
-	int	modeset;
-
-	i = 1;
-	modeset = 0;
-	while (argv[i] && i <= 2 && (ft_strncmp(argv[i], "--", 2) == 0))
-	{
-		printf("in process flags, checking argv[%d] %s\n", i, argv[i]);
-		if (ft_strncmp(argv[i], "--bench", ft_strlen("--bench")) == 0)
-		{
-			if (*bench != 1)
-				*bench = 1;
-			else
-				return (-1);
-		}
-		else if (ft_strncmp(argv[i], "--adaptive", ft_strlen("--adaptive")) == 0)
-		{
-			if (modeset == 1)
-				return (-1);
-			else
-			{
-				*mode = 1;
-				modeset = 1;
-			}
-		}
-		else if (ft_strncmp(argv[i], "--simple", ft_strlen("--simple")) == 0)
-		{
-			if (modeset == 1)
-				return (-1);
-			else
-			{
-				*mode = 2;
-				modeset = 1;
-			}
-		}
-		else if (ft_strncmp(argv[i], "--medium", ft_strlen("--medium")) == 0)
-		{
-			if (modeset == 1)
-				return (-1);
-			else
-			{
-				*mode = 3;
-				modeset = 1;
-			}
-		}
-		else if (ft_strncmp(argv[i], "--complex", ft_strlen("--complex")) == 0)
-		{
-			if (modeset == 1)
-				return (-1);
-			else
-			{
-				*mode = 4;
-				modeset = 1;
-			}
-		}
-		else
-			return (-1);
-		i++;
-	}
-	return (i - 1);
-}
-
-int	arrlen(char **arr)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
+	while (s1[i] == s2[i])
+	{
+		if (s1[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}
+
+int	setmode(int *mode, int *modeset, int newmode)
+{
+	if (*modeset == 1)
+		return (0);
+	*mode = newmode;
+	*modeset = 1;
+	return (1);
+}
+
+char	**process_flags(char **argv, int *mode, int *bench)
+{
+	int		i;
+	int		modeset;
+	char	**arr;
+
+	i = 1;
+	modeset = 0;
+	arr = argv;
+	while (arr[i] && i <= 2 && (ft_strncmp(arr[i], "--", 2) == 0))
+	{
+		if (ft_strcmp(arr[i], "--bench") == 0)
+		{
+			if (*bench)
+				return (NULL);
+			*bench = 1;
+		}
+		else if (ft_strcmp(arr[i], "--adaptive") == 0)
+		{
+			if (!setmode(mode, &modeset, 1))
+				return (NULL);
+		}
+	   	else if (ft_strcmp(arr[i], "--simple") == 0)
+		{
+			if (!setmode(mode, &modeset, 2))
+				return (NULL);
+		}
+		else if (ft_strcmp(arr[i], "--medium") == 0)
+		{
+			if (!setmode(mode, &modeset, 3))
+				return (NULL);
+		}
+		else if (ft_strcmp(arr[i], "--complex") == 0)
+		{
+			if (!setmode(mode, &modeset, 4))
+				return (NULL);
+		}
+		else
+			return (NULL);  // unknown flag
+		i++;
+	}
+	printf("arr[0] is %s and arr[i] is %s\n", arr[0], arr[i]);
+	return (arr + i);
+}
+
+int	arrlen(char **arr)
+{
+	/*This function takes an array as input and returns its length*/
+
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return (0);
 	while (arr[i])
 		i++;
 	return (i);
@@ -148,72 +154,36 @@ int	arrlen(char **arr)
 
 char	**process_input(int argc, char **argv)
 {
-	/* This function takes as input the number of arguments argc and the arraz of arguments argv
+	/* This function takes as input the number of arguments argc and the array of arguments argv
 	 * It does the following:
 	 * - checks that there is at least one argument, else returns NULL
-	 * - if there is only one argument, it calls ft_split(str, ' ') and turns it into an arr
-	 * - checks the arr for duplicates, if found, returns NULL
-	 * - checks the arr for non-ints, if found, returns NULL  -- STILL TO BE DONE
+	 * - checks whether there are flags and set the mode and bench variables
+	 * - after the flags, if there is only one argument, splits it if possible
+	 * - checks the arguments for duplicates, if found, returns NULL
+	 * - checks the arguments for non-ints, if found, returns NULL
 	 * */
 	
-	char	**arr;
 	int		mode;
 	int		bench;
-	int		flagcheck;
 
 	mode = 1;
 	bench = 0;
-	flagcheck = 0;
 	if (argc == 1)
-	{
-		printf("Give at least 2 integers as arguments");
 		return (NULL);
-	}
-	flagcheck = process_flags(argv, &mode, &bench);
-	printf("flagcheck is %d\n", flagcheck);
-	if (flagcheck == -1)
-	{
-		printf("Error\n");
+	argv = process_flags(argv, &mode, &bench);
+	printf("mode: %d\nbench: %d\n", mode, bench);
+	if (!argv)
 		return (NULL);
-	}
-	argv = argv + flagcheck;
-	if (!argv[1])
+	printf("argv[0] is %s\n", argv[0]);
+	if (arrlen(argv) == 1)
 	{
-		printf("Error\n");
-		return (NULL);
-	}
-	printf("after processing the flags, mode is %d and bench is %d\narr[0] is now %s\n", mode, bench, argv[0]);
-	// if there are exactly 2 arguments, split the string with a space separator
-	printf("argc - flag check = %d - %d\n", argc, flagcheck);
-	if (argc - flagcheck == 2)
-	{
-		arr = ft_split(argv[1], ' ');
-		if (!arr)
-		{
-			printf("the string of input is not in the right format\n");
+		argv = ft_split(argv[0], ' ');
+		if (!argv)
 			return (NULL);
-		}
 	}
-	// if there are more than 2 arguments, we assign the argv starting from the second argument to arr
-	// now arr is an array of strings with all the input arguments
-	else
-		arr = argv + 1;
-	if (arrlen(arr) < 2)
-	{
-		printf("Error\n");
+	if (has_invalid_args(argv) || has_duplicates(argv))
 		return (NULL);
-	}
-	if (has_invalid_args(arr))
-	{
-		printf("There should only be integers in the input\n");
-		return (NULL);
-	}
-	if (has_duplicates(arr))
-	{
-		printf("There should be no duplicates in the input\n");
-		return (NULL);
-	}
-	return (arr);
+	return (argv);
 }
 
 int	fill_stack(t_node **stack, char **arr)
@@ -222,20 +192,19 @@ int	fill_stack(t_node **stack, char **arr)
 	 * where each element of the array is a node
 	 * It returns the number of elements in the linked list*/
 	
-	int	i;
+	int		i;
 	t_node	*node;
 
 	i = 0;
 	while (arr[i])
 	{
 		node = create_node(ft_atoi(arr[i]));
+		if (!node)
+			return (0);
 		add_node(stack, node);
 		i++;
 	}
 	if (i == 1)
-	{
-		printf("Give at least 2 integers as arguments\n");
 		return (1);
-	}
 	return (i);
-}	
+}
