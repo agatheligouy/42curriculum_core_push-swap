@@ -6,7 +6,7 @@
 /*   By: aligouy <aligouy@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 17:38:48 by aligouy           #+#    #+#             */
-/*   Updated: 2026/06/10 14:59:25 by aligouy          ###   ########.fr       */
+/*   Updated: 2026/06/11 12:40:09 by aligouy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,68 @@ int	has_invalid_args(char **arr)
 	return (0);
 }
 
-char	*flagcheck(char *str)
+int	process_flags(char **argv, int *mode, int *bench)
 {
-	char	*flag;
-	int		i;
+	int	i;
+	int	modeset;
 
-	i = 0;
-	flag = NULL;
-	printf("in flagcheck, argv[1] is %s\n", str);
-	if (str[0] == '-' && str[1] == '-')
+	i = 1;
+	modeset = 0;
+	while (argv[i] && i <= 2 && (ft_strncmp(argv[i], "--", 2) == 0))
 	{
-		printf("found --, str + 2 is %s\n", str + 2);
-		if (ft_strncmp(str + 2, "adaptative", ft_strlen("adaptative")) == 0)
-			flag = str + 2;
+		printf("in process flags, checking argv[%d] %s\n", i, argv[i]);
+		if (ft_strncmp(argv[i], "--bench", ft_strlen("--bench")) == 0)
+		{
+			if (*bench != 1)
+				*bench = 1;
+			else
+				return (-1);
+		}
+		else if (ft_strncmp(argv[i], "--adaptive", ft_strlen("--adaptive")) == 0)
+		{
+			if (modeset == 1)
+				return (-1);
+			else
+			{
+				*mode = 1;
+				modeset = 1;
+			}
+		}
+		else if (ft_strncmp(argv[i], "--simple", ft_strlen("--simple")) == 0)
+		{
+			if (modeset == 1)
+				return (-1);
+			else
+			{
+				*mode = 2;
+				modeset = 1;
+			}
+		}
+		else if (ft_strncmp(argv[i], "--medium", ft_strlen("--medium")) == 0)
+		{
+			if (modeset == 1)
+				return (-1);
+			else
+			{
+				*mode = 3;
+				modeset = 1;
+			}
+		}
+		else if (ft_strncmp(argv[i], "--complex", ft_strlen("--complex")) == 0)
+		{
+			if (modeset == 1)
+				return (-1);
+			else
+			{
+				*mode = 4;
+				modeset = 1;
+			}
+		}
 		else
-			return (NULL);
+			return (-1);
+		i++;
 	}
-	return (flag);
+	return (i);
 }
 
 char	**process_input(int argc, char **argv)
@@ -102,14 +147,33 @@ char	**process_input(int argc, char **argv)
 	 * */
 	
 	char	**arr;
-	char	*flag;
+	int		mode;
+	int		bench;
+	int		flagcheck;
 
+	mode = 1;
+	bench = 0;
+	flagcheck = 0;
 	if (argc == 1)
 	{
 		printf("Give at least 2 integers as arguments");
 		return (NULL);
 	}
-	else
+	flagcheck = process_flags(argv, &mode, &bench);
+	printf("flagcheck is %d\n", flagcheck);
+	if (flagcheck == -1)
+	{
+		printf("Error\n");
+		return (NULL);
+	}
+	arr = argv + flagcheck;
+	if (!arr[0])
+	{
+		printf("Error\n");
+		return (NULL);
+	}
+	printf("after processing the flags, mode is %d and bench is %d\narr[0] is now %s\n", mode, bench, arr[0]);
+	/*else
 	{
 		if (flagcheck(argv[1]) && argc > 2)
 		{
@@ -129,9 +193,9 @@ char	**process_input(int argc, char **argv)
 		}
 		else
 			arr = argv + 1;
-	}
+	}*/
 	// if there are exactly 2 arguments, split the string with a space separator
-	if (argc == 2)
+	if (argc - flagcheck == 2)
 	{
 		arr = ft_split(argv[1], ' ');
 		if (!arr)
