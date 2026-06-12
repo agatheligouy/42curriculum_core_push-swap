@@ -84,13 +84,28 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	setmode(int *mode, int *modeset, int newmode)
+void	setmode(int *mode, int *modeset, int newmode)
 {
-	if (*modeset == 1)
-		return (0);
 	*mode = newmode;
 	*modeset = 1;
-	return (1);
+}
+
+char	**checkmodes(char **arr, int	*mode, int *modeset, int i)
+{
+	char	**ret;	
+		
+	ret = arr;
+	if (ft_strcmp(arr[i], "--adaptive") == 0) 
+		setmode(mode, modeset, 1);
+	else if (ft_strcmp(arr[i], "--simple") == 0) 
+		setmode(mode, modeset, 2);
+	else if (ft_strcmp(arr[i], "--medium") == 0)
+		setmode(mode, modeset, 3);
+	else if (ft_strcmp(arr[i], "--complex") == 0)
+		setmode(mode, modeset, 4);
+	else
+		return (NULL);  // unknown flag
+	return (ret);
 }
 
 char	**process_flags(char **argv, int *mode, int *bench)
@@ -102,7 +117,7 @@ char	**process_flags(char **argv, int *mode, int *bench)
 	i = 1;
 	modeset = 0;
 	arr = argv;
-	while (arr[i] && i <= 2 && (ft_strncmp(arr[i], "--", 2) == 0))
+	while (arr[i] && (ft_strncmp(arr[i], "--", 2) == 0))
 	{
 		if (ft_strcmp(arr[i], "--bench") == 0)
 		{
@@ -110,31 +125,13 @@ char	**process_flags(char **argv, int *mode, int *bench)
 				return (NULL);
 			*bench = 1;
 		}
-		else if (ft_strcmp(arr[i], "--adaptive") == 0)
-		{
-			if (!setmode(mode, &modeset, 1))
+		else if (modeset == 1)
+			return (NULL); // mode already set
+		else 
+			if(!(arr = checkmodes(arr, mode, &modeset, i)))
 				return (NULL);
-		}
-	   	else if (ft_strcmp(arr[i], "--simple") == 0)
-		{
-			if (!setmode(mode, &modeset, 2))
-				return (NULL);
-		}
-		else if (ft_strcmp(arr[i], "--medium") == 0)
-		{
-			if (!setmode(mode, &modeset, 3))
-				return (NULL);
-		}
-		else if (ft_strcmp(arr[i], "--complex") == 0)
-		{
-			if (!setmode(mode, &modeset, 4))
-				return (NULL);
-		}
-		else
-			return (NULL);  // unknown flag
 		i++;
 	}
-	printf("arr[0] is %s and arr[i] is %s\n", arr[0], arr[i]);
 	return (arr + i);
 }
 
@@ -171,10 +168,10 @@ char	**process_input(int argc, char **argv)
 	if (argc == 1)
 		return (NULL);
 	argv = process_flags(argv, &mode, &bench);
-	printf("mode: %d\nbench: %d\n", mode, bench);
+	printf("mode: %d\nbench: %d\n", mode, bench); // delete later
 	if (!argv)
 		return (NULL);
-	printf("argv[0] is %s\n", argv[0]);
+	printf("argv[0] is %s\n", argv[0]); // delete later
 	if (arrlen(argv) == 1)
 	{
 		argv = ft_split(argv[0], ' ');

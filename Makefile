@@ -12,7 +12,7 @@
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 NAME = push_swap
 LIBFT_DIR = ./libft
